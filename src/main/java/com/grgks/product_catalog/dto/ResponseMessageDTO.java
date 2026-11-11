@@ -13,6 +13,10 @@ public record ResponseMessageDTO(
         return new ResponseMessageDTO("error", message, null);
     }
 
+    public static ResponseMessageDTO success(String message) {
+        return new ResponseMessageDTO("success", message, null);
+    }
+
     public static ResponseMessageDTO validationError(Map<String, String> errors) {
         return new ResponseMessageDTO("error", "Validation failed", errors);
     }
