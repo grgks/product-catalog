@@ -27,6 +27,5 @@ public record ProductRequestDTO(
         @NotNull(message = "Category is required")
         Category category,
 
-
         Boolean available
 ) {}
