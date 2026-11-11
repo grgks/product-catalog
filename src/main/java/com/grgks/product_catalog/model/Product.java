@@ -27,7 +27,7 @@ public class Product {
     private String name;
 
     @Column(name = "SKU", unique = true, nullable = false)
-    private Long sku;
+    private String sku;
 
     @Column(name = "description", nullable = false, length = 3000)
     private String description;
