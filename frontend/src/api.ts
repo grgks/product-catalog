@@ -2,7 +2,7 @@ import axios from "axios";
 import {type Product, type ProductRequest, Category } from "./types";
 
 const API = axios.create({
-    baseURL: "http://localhost:8080/api/products"
+    baseURL: "/api/products"      //if run only local http://localhost:8080/api/products
 });
 
 export const getAllProducts = () =>
