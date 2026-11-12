@@ -1,5 +1,6 @@
 package com.grgks.product_catalog.core;
 
+import com.grgks.product_catalog.core.exceptions.ProductAlreadyExistsException;
 import com.grgks.product_catalog.core.exceptions.ProductNotFoundException;
 import com.grgks.product_catalog.dto.ResponseMessageDTO;
 import org.springframework.http.HttpHeaders;
@@ -39,11 +40,16 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
             errors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
 
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(ResponseMessageDTO.validationError(errors), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({ProductNotFoundException.class})
     public ResponseEntity<ResponseMessageDTO> handleNotFoundException(ProductNotFoundException e){
         return new ResponseEntity<>(ResponseMessageDTO.error(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({ProductAlreadyExistsException.class})
+    public ResponseEntity<ResponseMessageDTO> handleAlreadyExistsException(ProductAlreadyExistsException e) {
+        return new ResponseEntity<>(ResponseMessageDTO.error(e.getMessage()), HttpStatus.CONFLICT);
     }
 }
