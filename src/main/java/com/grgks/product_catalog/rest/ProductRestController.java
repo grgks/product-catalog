@@ -39,13 +39,12 @@ public class ProductRestController {
 
     @GetMapping
     public ResponseEntity<List<ProductResponseDTO>> searchProducts(
-            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String search,
             @RequestParam(required = false) Category category,
             @RequestParam(required = false) Boolean available,
             @RequestParam(required = false) String sku) {
-
         return new ResponseEntity<>(
-                productService.searchProduct(name, category, available, sku), HttpStatus.OK);
+                productService.searchProduct(search, category, available, sku), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
