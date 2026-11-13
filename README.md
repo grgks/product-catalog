@@ -10,10 +10,29 @@ A full-stack product catalog management application built as a coding exercise.
 ## Prerequisites
 
 - Java 21+
-- Node.js 18+
+- Node.js 22+
 - npm
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) for containerized setup
 
-## Run Backend
+## Run with Docker
+
+```bash
+git clone https://github.com/grgks/product-catalog.git
+cd product-catalog
+docker-compose up --build
+```
+
+- **Frontend:** http://localhost:4000 (if port 4000 is in use, change it in `docker-compose.yml` under `frontend > ports`)
+- **Backend API:** http://localhost:8080/api/products
+
+```bash
+docker-compose down      # stop
+docker-compose down -v   # stop + remove data
+```
+
+## Run Locally
+
+### Backend
 
 ```bash
 ./gradlew bootRun
@@ -21,13 +40,20 @@ A full-stack product catalog management application built as a coding exercise.
 
 Backend runs at `http://localhost:8080`
 
-## Run Frontend
+### Frontend
+
+
 
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
+> ***Note:*** When running locally, update `frontend/src/api/api.ts --> (line: 5) <--` to point to the backend directly:
+> ```typescript
+> baseURL: "http://localhost:8080/api/products"
+> ```
+> The Docker setup uses `/api/products` because Nginx proxies the requests.
 
 Frontend runs at `http://localhost:5173`
 
