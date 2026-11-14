@@ -12,7 +12,7 @@ A full-stack product catalog management application built as a coding exercise.
 - Java 21+
 - Node.js 22+
 - npm
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) for containerized setup
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (must be running on Windows / Mac) for containerized setup
 
 ## Run with Docker
 
@@ -41,8 +41,6 @@ docker-compose down -v   # stop + remove data
 Backend runs at `http://localhost:8080`
 
 ### Frontend
-
-
 
 ```bash
 cd frontend
