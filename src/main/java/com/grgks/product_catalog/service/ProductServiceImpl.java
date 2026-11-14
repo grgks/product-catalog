@@ -58,8 +58,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductResponseDTO updateProduct(ProductRequestDTO dto, Long id) throws ProductNotFoundException {
 
+
         Product existingProduct = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
+
+        if (productRepository.existsByName(dto.name()) && !existingProduct.getName().equals(dto.name())) {
+            throw new ProductAlreadyExistsException("Product with name '" + dto.name() + "' already exists");
+        }
 
         existingProduct.setName(dto.name());
         existingProduct.setDescription(dto.description());
